@@ -1,0 +1,115 @@
+URL:
+  New: "http://ec2-3-214-0-142.compute-1.amazonaws.com/Core/Login"
+  
+Common:
+   btn_next: "btnNext"  
+   btn_previous: "btnPrevious"
+   Heading_FEINSame: "//h3[contains(text(),'Enter Federal Employer Identification Number')]"
+   radio_address: "//input[@type='radio']//following-sibling::i"
+   btn_confirm: "buttonConfirm"
+   btn_submit: "btnSubmit"
+   btn_indowner: "btnAddIndividual"
+   btn_save: "btnAdd"
+   btn_submit2: "//button[@type='submit' and @value='Submit']"
+   txt_EAN: "lblUiEAN"
+   txt_Username: "lblContribUserId"
+   
+HomePage:
+   Username: "//input[@type='text']"
+   Loginbutton: "//button[@value='Login']"
+   Employer: "//li[@title='Employer']"
+   EmployerRegistration: "(//li[@title='Employer Registration'])[1]"
+   Agent: "//li[@title='Agent']"
+   TPARegistration: "(//li[@title='TPA Registration'])[1]"
+  
+    #Screen1 - Emp Reg
+EMPRegNotificationScreen:
+    radio_servicewage: "rblSrvcPerformed"
+    txt_noofind: "txtCovEmpNo"
+    txt_servicebegindate: "txtCovDate"
+    txt_serviceenddate: "txtFWageDate"
+    txt_FEIN: "txtFein"
+    #Screen2 - Emp Reg
+EMPREmpLiabilitywages:
+     radio_nonagri: "rblNonAgriWages"
+     radio_agri: "rblAgriWages"
+     radio_Domwages: "rblDomeWages"
+     ddl_wagesyear: "ddlYrWages"
+     ddl_wagequarter: "ddlQtrWages"
+     txt_grosswage: "txtAmount"
+     #screen4 - Admin info
+EMPRAdminInfo:
+      txt_firstname: "txtAdmFirstNa"
+      txt_lastname: "txtAdmLastNa"
+      txt_bussinessphoneno: "textBoxPhoneNumberadminPrimary"
+      txt_admintitle: "txtAdmTitle"
+      txt_email: "txtAdmEmail"
+      txt_reenteremail: "txtAdmReEmail"
+      chk_authorize: "chkAuthorize"
+      #screen 6 - Identity Info
+EMPRIdentityInfo:
+      ddl_entitytype: "ddlEntityType"
+      txt_legalname: "txtLegalName"
+      txt_addressline1: "textBoxAddress11addr1"
+      txt_city: "textBoxCityaddr1"
+      txt_ZIPcode: "textBoxZipaddr1"   
+      ddl_state: "selectBoxStateaddr1"
+      txt_bussinessphone: "textBoxPhoneNumberprimary"
+      txt_legalemail: "txtLglEmail"
+      txt_reenteremail: "txtReEmail"
+      #screen 7 - Temp ID
+EMPRTemID:
+      txt_TEMPUserID: "lblTempUserId"
+      #Screen 8 - Entherby=ussinessinfo
+EMPRBussinessINFO:
+      radio_PEO: "rblEmpFiscalIn"    
+      radio_ClinetPEO: "rblClientLeasingIn"
+      radio_NMAC: "rblNMAC"
+      radio_contarctors: "rblContractorsIn"
+      #Screen 9 - Enterbybussinessinfo cont
+EMPRBussinessINFOCont:
+      radio_501: "rbl501c3In"    
+      radio_REIM: "rblLocalReimCstBasFin"
+      radio_Agency: "rblAcqYesNoIn"
+      radio_purcase: "rblPurchaseIn"
+      radio_location: "rblMultiLocIn"
+      #Screen 10 - Enter Incorporation info
+EMPRIncorInfo:
+      txt_crs: "txtCRS"
+      txt_incordate: "txtIncorpDate"
+      #Screen 11 - EnterPhysicalAddress
+EMPREnterPhysicalAdd:
+      checkbox_addresstype: "ddlPhysSameAs"    
+      radio_phylocation: "rblNoPhysLoc"
+      radio_statewide: "rblTeleCommutersIn"  
+      #Screen 12 - BusinessRecord
+EMPRBussinessrecord:
+      checkbox_bussinessrecord: "ddlBusiSameAs"  
+      #Screen 13 - Differenr Bssiness Record
+EMPRAdditionalAddress:
+      radio_additionaladdress: "rblAdditionalAddrs" 
+      #Screen 14 - NAICS Description
+EMPRNAICDescription:
+      txt_NAICSDes: "txtNature" 
+      checkbox_NAICS1: "ddlNaics1"   
+      checkbox_NAICS2: "ddlNaics2"
+      checkbox_NAICS3: "ddlNaics3"
+      checkbox_NAICS4: "ddlNaics4"
+      checkbox_NAICS5: "ddlNaics5"
+      #Screen 15 - owner officer info
+EMPROwnerofficerinfo:
+      txt_ownerfirstname: "txtFirstName"
+      txt_ownerlatname: "txtLastName"
+      txt_percentage: "txtPercent"
+      txt_firstownershipdate: "txtEffDate"
+      txt_addressline1: "textBoxAddress11addrTPA"
+      txt_ownercity: "textBoxCityaddrTPA"
+      ddl_ownerstate: "selectBoxStateaddrTPA"
+      txt_ownerzip: "textBoxZipaddrTPA"
+      txt_ownerphone: "textBoxPhoneNumberaddrTPA"
+      txt_owneremail: "ownrEmail"
+      txt_reenterowneremail: "txtReenterOwnrEmail"   
+      
+   
+      
+      
