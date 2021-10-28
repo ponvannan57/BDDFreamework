@@ -7,6 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
 import main.Mainclass;
 
@@ -50,7 +51,8 @@ public class Stepdefinition extends Mainclass{
 	     
 	     clickelement("id","Common.btn_next");
 	     
-	     while(d.getPageSource().contains("Enter this employer's Federal Employer Identification Number (FEIN) is not a valid federal ein")) {
+	     while(d.getPageSource().contains("Enter this employer's Federal Employer Identification Number (FEIN) is not a valid federal ein")||
+	    		 d.getPageSource().contains("Enter this employer's Federal Employer Identification Number (FEIN) is not a valid #")) {
 	    	 System.out.println("Inside Incorrect FEIN");
 	    	 cleartext("id","EMPRegNotificationScreen.txt_FEIN");
 	    	 SendText("id","EMPRegNotificationScreen.txt_FEIN",GenerateFEIN());
@@ -206,10 +208,70 @@ public class Stepdefinition extends Mainclass{
 	     storeelementetext("id","Common.txt_Username");
 	     String Username = StoredSring;
 	     System.out.println("***** The Username is --> "+Username+" *****");
-	     
-	     
-	       
+//	     clickelement("id","Common.btn_Home");       
 	}
+	
+	
+
+    @Then("^Login with the username (.+)$")
+    public void login_with_the_username(String username) throws Throwable {
+    	SendText("xpath","HomePage.Username",username);
+    	clickelement("xpath","HomePage.Loginbutton"); 
+        
+    }
+    
+    @And("^I Login With Newly Created Employer and navigate to wage submission$")
+    public void i_login_with_newly_created_employer_and_navigate_to_wage_submission() throws Throwable {
+    	clickelement("id","Common.btn_Home"); 
+    	clickelement("xpath","WageSubmission.btn_wgedetails"); 
+    	clickelement("xpath","WageSubmission.btn_wagesubmission"); 
+        
+    }
+
+    @When("^I select year (.+) and quarter (.+) for wage submission$")
+    public void i_select_year_and_quarter_for_wage_submission(String year, String quarter) throws Throwable {
+    	selectdropdownbytext("id", "WageSubmission.ddl_wageyear", year);
+    	selectdropdownbytext("id", "WageSubmission.ddl_wagequarter", quarter);
+        
+    }
+    
+    @Then("^I select wage submission method as (.+)$")
+    public void i_select_wage_submission_method_as(String method) throws Throwable {
+    	
+    	switch(method){
+    	
+    	case"File":
+    		Selectradiobuttonbyindex("xpath","WageSubmission.radio_filigmethod","1");
+    		break;
+    	case"Copy":
+    		Selectradiobuttonbyindex("xpath","WageSubmission.radio_filigmethod","2");
+    		break;
+    	case"Manual":
+    		Selectradiobuttonbyindex("xpath","WageSubmission.radio_filigmethod","3");
+    		break;
+    	case"No":
+    		Selectradiobuttonbyindex("xpath","WageSubmission.radio_filigmethod","4");
+    		break;
+    	
+    	}
+    	clickelement("id","Common.btn_next");
+       
+    }
+    
+    @And("^I select the File type as (.+)$")
+    public void i_select_the_file_type_as(String filetype) throws Throwable {
+    	SelectElementbyValue("id",filetype);
+    	Selectradiobuttonbyname("id","WageSubmission.radio_filetype","Yes");
+    	clickelement("id","Common.btn_next");
+    
+    }
+
+    @Then("^I Upload the file (.+)$")
+    public void i_upload_the_file(String fileName) throws Throwable {
+    	Fileupload(fileName);
+    	clickelement("id","Common.btn_next");
+        
+    }
 	
     }
 

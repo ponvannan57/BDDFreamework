@@ -36,6 +36,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.yaml.snakeyaml.Yaml;
 
+import jxl.Cell;
+import jxl.Range;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.read.biff.PasswordException;
+
 public class Mainclass {
 	
 	public static WebDriver d;
@@ -181,6 +188,8 @@ public class Mainclass {
 
 	public static void Selectradiobuttonbyname(String locator,String Elementpath,String Name) {
 		
+		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -193,16 +202,34 @@ public class Mainclass {
 		}
 		
 	}
-
-	public static void Selectradiobuttonbyindex(String locator,String Elementpath,String Index) {
+	
+public static void SelectElementbyValue(String locator,String Value) {
+	
 		
 		switch(locator) {
 		
 		case"xpath":
-			d.findElement(By.xpath("//div[@id='"+getElementProperty(""+Elementpath+"")+"'//child::label)["+Index+"]")).click();
+			d.findElement(By.xpath("//input[@type='radio' and @value='"+Value+"']")).click();
 			break;
 		case"id":
-			d.findElement(By.xpath("//div[@id='"+getElementProperty(""+Elementpath+"")+"'//child::label)["+Index+"]")).click();
+			d.findElement(By.xpath("//input[@type='radio' and @value='"+Value+"']")).click();
+			break;
+		
+		}
+		
+	}
+
+	public static void Selectradiobuttonbyindex(String locator,String Elementpath,String Index) {
+		
+		WaitForElement(10,locator,Elementpath);
+		
+		switch(locator) {
+		
+		case"xpath":
+			d.findElement(By.xpath("(//div[@id='"+getElementProperty(""+Elementpath+"")+"']//child::label)["+Index+"]")).click();
+			break;
+		case"id":
+			d.findElement(By.xpath("(//div[@id='"+getElementProperty(""+Elementpath+"")+"']//child::label)["+Index+"]")).click();
 			break;
 		
 		}
@@ -241,6 +268,8 @@ public class Mainclass {
 
 	public static void javascriptclickelement(String locator, String Elementpath) {
 		
+		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -262,6 +291,8 @@ public class Mainclass {
 
 	public static void cleartext(String locator, String Elementpath) {
 		
+		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -280,6 +311,8 @@ public class Mainclass {
 
 	public static void SendText(String locator, String Elementpath, String Text) {
 		
+		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -297,6 +330,8 @@ public class Mainclass {
 	}
 	
 	public static void javaSriptSendText(String locator, String Elementpath, String Text) {
+		
+		WaitForElement(10,locator,Elementpath);
 		
 		switch(locator) {
 		
@@ -347,6 +382,8 @@ public class Mainclass {
 
 	public static void ScrollToElement (String locator,String Elementpath) {
 		
+		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -395,6 +432,7 @@ public class Mainclass {
 		public static void selectdropdownbyvalue(String locator, String Elementpath, String Value) {
 			
 			WaitForElement(10,locator,Elementpath);
+			
 		switch(locator) {
 		
 		case"xpath":
@@ -417,6 +455,7 @@ public class Mainclass {
 	public static void selectdropdownbyindex(String locator, String Elementpath, int Index) {
 		
 		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -438,6 +477,7 @@ public class Mainclass {
 	public static void selectdropdownbytext(String locator, String Elementpath, String Text) {
 		
 		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -459,6 +499,7 @@ public class Mainclass {
 	public static void deselectdropdownbyvalue(String locator, String Elementpath, String Value) {
 		
 		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -479,6 +520,9 @@ public class Mainclass {
 	}
 	
 	public static void deselectdropdownbyindex(String locator, String Elementpath, int Index) {
+		
+		WaitForElement(10,locator,Elementpath);
+		
 	 switch(locator) {
 		
 	 case"xpath":
@@ -499,6 +543,9 @@ public class Mainclass {
 	}
 
 	public static void deselectdropdownbytext(String locator, String Elementpath, String Text) {
+		
+		WaitForElement(10,locator,Elementpath);
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -520,6 +567,7 @@ public class Mainclass {
 	
 	public static void SelectradiobuttonbyValue(String locator,String Value) {
 		
+		
 		switch(locator) {
 		
 		case"xpath":
@@ -534,6 +582,7 @@ public class Mainclass {
 	}
 	
 	public static void selectcheckbox(String locator,String ID) {
+		
 		
 		switch(locator) {
 		
@@ -550,6 +599,8 @@ public class Mainclass {
 
 	public static void storeelementetext(String locator, String Elementpath) {
 		
+		WaitForElement(10,locator,Elementpath);
+		
 		
 		switch(locator) {
 		
@@ -561,11 +612,21 @@ public class Mainclass {
 			break;
 		
 		}
-	
-		
-
 		
 	}
+	
+	public static void Fileupload(String FileName) {
+		
+		WebElement element = d.findElement(By.id("fuBrowse"));
+		element.sendKeys("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\"+FileName+"");
+		
+	}
+	
+	public static void FileUpdate(String FileName, String UpdateTest) {
+		
+		
+			
+		}
 	
 	
 	public static void terminate() {

@@ -13,6 +13,7 @@ Common:
    btn_submit2: "//button[@type='submit' and @value='Submit']"
    txt_EAN: "lblUiEAN"
    txt_Username: "lblContribUserId"
+   btn_Home: "btnTribeReimHome"
    
 HomePage:
    Username: "//input[@type='text']"
@@ -108,7 +109,16 @@ EMPROwnerofficerinfo:
       txt_ownerzip: "textBoxZipaddrTPA"
       txt_ownerphone: "textBoxPhoneNumberaddrTPA"
       txt_owneremail: "ownrEmail"
-      txt_reenterowneremail: "txtReenterOwnrEmail"   
+      txt_reenterowneremail: "txtReenterOwnrEmail" 
+WageSubmission:
+      btn_wgedetails: "//span[contains(text(),'Employment and Wage Detail Reporting Home')]"    
+      btn_wagesubmission: "//span[contains(text(),'Submit Employment and Quarterly Wage Detail')]"   
+      #Screen 1 - SelectFiling Method
+      ddl_wageyear: "ddlYear"
+      ddl_wagequarter: "ddlQuarter"
+      radio_filigmethod: "rblFilingMethod"
+      #Screen 2 - Select File Type
+      radio_filetype: "rbtHireContractors"
       
    
       
