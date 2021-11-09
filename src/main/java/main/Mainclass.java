@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -58,6 +59,11 @@ public class Mainclass {
 	public static String Username;
 	public static String EAN;
 	public static String StoredSring;
+	public static int Gracemonth;
+	public static int totalmonths;
+	public static int wagetotalmonths;
+	public static String Tabledata;
+
 	
     
 	@SuppressWarnings("deprecation")
@@ -188,7 +194,6 @@ public class Mainclass {
 
 	public static void Selectradiobuttonbyname(String locator,String Elementpath,String Name) {
 		
-		WaitForElement(10,locator,Elementpath);
 		
 		switch(locator) {
 		
@@ -221,7 +226,6 @@ public static void SelectElementbyValue(String locator,String Value) {
 
 	public static void Selectradiobuttonbyindex(String locator,String Elementpath,String Index) {
 		
-		WaitForElement(10,locator,Elementpath);
 		
 		switch(locator) {
 		
@@ -627,6 +631,56 @@ public static void SelectElementbyValue(String locator,String Value) {
 		
 			
 		}
+	
+	public static int interestmonthcalculator(int wagesubmissionyear, String quarter) {
+		LocalDate currentdate = LocalDate.now();
+    	int Year = currentdate.getYear();
+    	int Month = 12-currentdate.getMonthValue();	
+    	int wageyear = Year - wagesubmissionyear;
+    	totalmonths = (wageyear*12)-Month;
+
+    	
+    	switch(quarter) {
+    	
+    	case"January, February, March (Q1)":
+    		 Gracemonth = 8;
+    		break;
+    	case"April, May, June (Q2)":
+    		 Gracemonth = 5;
+    		break;
+    	case"July, August, September (Q3)":
+    		 Gracemonth = 2;
+    		break;
+    	case"October, November, December (Q4)":
+    		 Gracemonth = -1;
+    		break;
+    	
+    	}
+    	
+    	if(quarter.equals("October, November, December (Q4)") && totalmonths ==0)
+    	{
+    		
+    		 wagetotalmonths = totalmonths+0;
+        	System.out.println(wagetotalmonths);
+    	}
+    	else {
+    		 wagetotalmonths = totalmonths+Gracemonth;
+        	System.out.println(wagetotalmonths);
+    	}
+    	
+    	return wagetotalmonths;
+    
+	} 
+	
+	public static String getTableData(String Elementpath,int RowIndex,int ColunmIndex) {
+		
+		Tabledata = d.findElement(By.xpath("((//div[@name='"+getElementProperty(""+Elementpath+"")+"'"
+				+ " or @id='"+getElementProperty(""+Elementpath+"")+"']//child::div[@class='divTableRow'])["+RowIndex+"]//child::div)["+ColunmIndex+"]")).getText();
+		
+		return Tabledata;
+		
+		
+	}
 	
 	
 	public static void terminate() {

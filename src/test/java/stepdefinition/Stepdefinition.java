@@ -1,5 +1,7 @@
 package stepdefinition;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.List;
 import java.util.Map;
 import org.openqa.selenium.By;
@@ -12,6 +14,9 @@ import io.cucumber.java.en.*;
 import main.Mainclass;
 
 public class Stepdefinition extends Mainclass{
+	public static int Taxrate;
+	public static String ActualUiroundOff;
+	public static String ActualInterestRate;
 	
 	@Given("^I Configure the Browser as \"([^\"]*)\" with URL \"([^\"]*)\"$")
     public void i_configure_the_browser_as_something_with_url_something(String Browser, String URL) throws Throwable {
@@ -220,6 +225,13 @@ public class Stepdefinition extends Mainclass{
         
     }
     
+    @And("^I navigate to Wage Submission$")
+    public void i_navigate_to_wage_submission() throws Throwable {
+    	clickelement("xpath","WageSubmission.btn_wgedetails"); 
+    	clickelement("xpath","WageSubmission.btn_wagesubmission"); 
+    }
+
+    
     @And("^I Login With Newly Created Employer and navigate to wage submission$")
     public void i_login_with_newly_created_employer_and_navigate_to_wage_submission() throws Throwable {
     	clickelement("id","Common.btn_Home"); 
@@ -270,8 +282,110 @@ public class Stepdefinition extends Mainclass{
     public void i_upload_the_file(String fileName) throws Throwable {
     	Fileupload(fileName);
     	clickelement("id","Common.btn_next");
-        
+    	
     }
-	
+    
+    @And("^I selct Overwrite or merge option (.+) if it gets displayed$")
+    public void i_selct_overwrite_or_merge_option_if_it_gets_displayed(String option) throws Throwable {
+    	Wait(5);
+    	if(d.findElement(By.xpath(getElementProperty("WageSubmission.radio_merge"))).isDisplayed()) {
+    		
+    		switch(option){
+    		case"Merge":
+    			clickelement("xpath","WageSubmission.radio_merge");
+    			break;
+    		case"Overwrite":
+    			clickelement("xpath","WageSubmission.radio_overwrite");
+    			break;
+    			
+    		}
+    		
+    	}
+    	
+    	clickelement("xpath","WageSubmission.radio_overwrite");
+    	clickelement("id","Common.btn_next");
+    		System.out.println("Not present");
+    }
+    
+    
+    @And("^I Select ignore errors and proceed to next screen$")
+    public void i_select_ignore_errors_and_proceed_to_next_screen() throws Throwable {
+    	Selectradiobuttonbyindex("id", "WageSubmission.radio_selectaction", "1");
+    	clickelement("id","Common.btn_next");
+       
+    }
+    
+    @When("^I click on button (.+) and proceed to next screen$")
+    public void i_click_on_button_and_proceed_to_next_screen(String button) throws Throwable {
+    	switch(button){
+    	
+    	case"Next":
+    		clickelement("id","Common.btn_next");
+    		break;
+    	case"Previous":
+    		clickelement("id","Common.btn_previous");
+    		break;
+    	case"SaveandExit":
+    		clickelement("id","Common.btn_saveabdexit");
+    		break;
+    	
+    	}
+    }
+
+
+    
+    @Then("^I calculate the Interest for Month (.+) and Quarter (.+)$")
+    public void i_calculate_the_interest_for_month_and_quarter(int wagesubmissionyear, String quarter) throws Throwable {
+    	interestmonthcalculator(wagesubmissionyear, quarter);
+    	System.out.println(wagetotalmonths);
+    	getTableData("WageSubmission.table_UITaxTable",4,2);
+    	System.out.println(Tabledata);
+    	String UITaxableage = Tabledata.replace(" ", "").replace("$", "").replace(",", "");
+    	double UITaxableage1 = Double.parseDouble(UITaxableage);
+    	getTableData("WageSubmission.table_UITaxTable",6,2);
+    	System.out.println(Tabledata);
+    	String UIContribution = Tabledata.replace(" ", "").replace("$", "").replace(",", "");
+//    	double UIContribution1 = Double.parseDouble(UIContribution);
+    	storeelementetext("id","WageSubmission.txt_UIContribution");
+    	String UIrate = StoredSring.replace(" ", "").replace("%", "").replace(",", "");
+    	double UIrate1 = Double.parseDouble(UIrate);
+    	double ActualUiContribution = UITaxableage1*(UIrate1/100);
+    	double ActualUiContributionroundOff = Math.round(ActualUiContribution * 100.0) / 100.0;
+    	if((ActualUiContributionroundOff*100)%10==0){
+    		
+    		ActualUiroundOff = String.format("%.2f", ActualUiContributionroundOff);
+    		System.out.println(ActualUiroundOff);
+    		
+    	}
+    	
+    	else {
+    		ActualUiroundOff = String.valueOf(ActualUiContributionroundOff);
+    		System.out.println(ActualUiroundOff);
+    	}
+    	
+    	assertEquals(ActualUiroundOff, UIContribution);	
+    	
+    	getTableData("WageSubmission.table_UITaxTable",12,2);
+    	System.out.println(Tabledata);
+    	String Interest = Tabledata.replace(" ", "").replace("$", "");
+    	double Wagemonths = wagetotalmonths;
+    	double ActualUiround = Double.parseDouble(ActualUiroundOff);
+    	System.out.println(ActualUiround);
+//    	double DoubleUI = Double.parseDouble(Interest);
+    	double ActualInterest = Wagemonths*(ActualUiround*0.01);
+    	System.out.println(ActualInterest);
+    	
+		if((ActualInterest*100)%10==0){
+		    		
+				ActualInterestRate = String.format("%.2f", ActualInterest);
+				System.out.println(ActualInterestRate);
+				
+			}
+			
+			else {
+				ActualInterestRate = String.valueOf(ActualInterest);
+			}
+		assertEquals(ActualInterestRate, Interest);	
+    }
     }
 

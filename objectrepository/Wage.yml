@@ -14,6 +14,7 @@ Common:
    txt_EAN: "lblUiEAN"
    txt_Username: "lblContribUserId"
    btn_Home: "btnTribeReimHome"
+   btn_saveabdexit: "btnSaveExit"
    
 HomePage:
    Username: "//input[@type='text']"
@@ -119,6 +120,16 @@ WageSubmission:
       radio_filigmethod: "rblFilingMethod"
       #Screen 2 - Select File Type
       radio_filetype: "rbtHireContractors"
+      #Screen 3 - Overwrite or merge Screen
+      radio_overwrite: "//input[@id='rbSelectActionDelete']//following-sibling::i"
+      radio_merge: "//input[@id='rbSelectActionMerge']//following-sibling::i"
+      #Screen 4 - File Preview
+      radio_selectaction: "rblProceedOptions"
+      #Screen 5 - Interest calculation Screen
+      txt_UIContribution: "lblUIContRate"
+      txt_taxablerate: "lblTaxableWageBase"
+      table_UITaxTable: "dataTableFileFormatSelect"
+      
       
    
       
