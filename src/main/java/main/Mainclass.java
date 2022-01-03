@@ -7,15 +7,23 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -156,6 +164,7 @@ public class Mainclass {
 		XSSFSheet Sheet = Wb.getSheet(sheetname);
 		String DATA;
 		
+		
 		try {
 			
 			DATA = Sheet.getRow(rowindex).getCell(rowindex).getStringCellValue();
@@ -241,12 +250,9 @@ public static void SelectElementbyValue(String locator,String Value) {
 	}
 
 	public static String GenerateFEIN() {
-	    // It will generate 6 digit random Number.
-	    // from 0 to 999999
 	    Random rnd = new Random();
 	    int number = rnd.nextInt(999999999);
 	    System.out.println(String.format("%09d", number));
-	    // this will convert any number sequence into 6 character.
 	    return String.format("%09d", number);
 	  
 	}
@@ -637,7 +643,9 @@ public static void SelectElementbyValue(String locator,String Value) {
     	int Year = currentdate.getYear();
     	int Month = 12-currentdate.getMonthValue();	
     	int wageyear = Year - wagesubmissionyear;
+  
     	totalmonths = (wageyear*12)-Month;
+    	
 
     	
     	switch(quarter) {
@@ -663,10 +671,15 @@ public static void SelectElementbyValue(String locator,String Value) {
     		 wagetotalmonths = totalmonths+0;
         	System.out.println(wagetotalmonths);
     	}
-    	else {
+    	else if(wageyear!=0) {
     		 wagetotalmonths = totalmonths+Gracemonth;
         	System.out.println(wagetotalmonths);
     	}
+    	
+    	else if(wageyear==0) {
+    		wagetotalmonths=0;
+    	}
+    	
     	
     	return wagetotalmonths;
     
@@ -682,6 +695,52 @@ public static void SelectElementbyValue(String locator,String Value) {
 		
 	}
 	
+	public static void findandreplace() {
+		
+		try {
+            Path path = Paths.get("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\CSV_DATA.csv");
+            Path path2 = Paths.get("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\CSV_Updated_DATA.csv");
+            Stream <String> lines = Files.lines(path);
+            List <String> replaced = lines.map(line -> line.replaceAll("xxxxxxxx", EAN)).collect(Collectors.toList());
+            Files.write(path2, replaced);
+            lines.close();
+            System.out.println("Find and Replace done!!!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+//	Map<String,String> variableMap = fillMap();
+//	Path path = Paths.get("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\CSV_DATA.csv");
+//	Stream<String> lines;
+//	try {
+//		lines = Files.lines(path,Charset.forName("UTF-8"));
+//		List<String> replacedLines = lines.map(line -> replaceTag(line,variableMap))
+//                .collect(Collectors.toList());
+//		Files.write(path
+//				, replacedLines, Charset.forName("UTF-8"));
+//		lines.close();
+//		System.out.println("Find and replace done");
+//	} catch (IOException e) {
+//		e.printStackTrace();
+//	}
+
+}
+
+
+public static Map<String,String> fillMap() {
+	Map<String,String> map = new HashMap<String,String>();
+	map.put("xxxxxxxx", EAN);
+	return map;
+}
+private static String replaceTag(String str, Map<String,String> map) {
+	for (Map.Entry<String, String> entry : map.entrySet()) {
+		if (str.contains(entry.getKey())) {
+			str = str.replace(entry.getKey(), entry.getValue());
+		}
+	}
+	return str;
+}
+
 	
 	public static void terminate() {
 		d.quit();

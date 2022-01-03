@@ -9,9 +9,14 @@ import main.*;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features={"src/test/java/features/WageSubmission.feature"},
-		glue="stepdefinition",
-		plugin = {"pretty", "html:target/cucumber-reports"}
+		features = "src/test/java/Features/WageSubmission.feature",
+		glue = "stepdefinition", 
+		monochrome = true, 
+		plugin = {
+				"pretty", "html:target/cucumber", "json:target/Cucumber.json",
+				"junit:target/Cucumber.xml" }, 
+		tags = "@EmpCreationandWageSubmission"
+	
     )
 
 public class Runnerclass extends Mainclass{
