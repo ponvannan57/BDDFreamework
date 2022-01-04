@@ -59,6 +59,7 @@ public class Mainclass {
 	public static Map<?,?> property;
 	public static String Parentfolder = "objectrepository/";
 	public static String Filepath;
+	public static String UploadFile;
 	public String nameofCurrClass = new Throwable().getStackTrace()[0] .getClassName();
 	public static JavascriptExecutor JS = (JavascriptExecutor)d;
 	public static Select Select;
@@ -71,6 +72,11 @@ public class Mainclass {
 	public static int totalmonths;
 	public static int wagetotalmonths;
 	public static String Tabledata;
+	public static String QuarterNo;
+	public static String YearandQuarter;
+	public static String FilePath;
+	public static String FileExtension;
+	public static String YEAR;
 
 	
     
@@ -625,19 +631,40 @@ public static void SelectElementbyValue(String locator,String Value) {
 		
 	}
 	
-	public static void Fileupload(String FileName) {
+	public static void Fileupload(String FileName, String FileType) {
+		
+		switch(FileType){
+		case"CSV":
+			FileExtension=".csv";
+   		 	break;
+		case"CSVTXT":
+			FileExtension=".txt";
+   		 	break;
+	   	case"TXT":
+	   		FileExtension=".txt";
+	   		break;
+	   	case"XML":
+	   		FileExtension=".xml";
+	   		break;
+	   	case"EFW2":
+	   		FileExtension=".txt";
+	   		break;
+	   	case"ICESA":
+	   		FileExtension=".txt";
+	   		break;
+		
+	}
+		
+		if(FileName.equals("CSVTXT")) {
+			FileExtension=".txt";
+		}
 		
 		WebElement element = d.findElement(By.id("fuBrowse"));
-		element.sendKeys("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\"+FileName+"");
+		element.sendKeys("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\"+FileName+""+"_Updated"+""+FileExtension+"");
 		
 	}
 	
-	public static void FileUpdate(String FileName, String UpdateTest) {
-		
-		
-			
-		}
-	
+
 	public static int interestmonthcalculator(int wagesubmissionyear, String quarter) {
 		LocalDate currentdate = LocalDate.now();
     	int Year = currentdate.getYear();
@@ -695,6 +722,71 @@ public static void SelectElementbyValue(String locator,String Value) {
 		
 	}
 	
+	public static void findandreplacedatainfile(String FileType, String FileName,String Year, String Quarter) throws IOException {
+	
+		YEAR = Year;
+		switch(Quarter){
+			
+			case"January, February, March (Q1)":
+	   		 	QuarterNo = "1";
+	   		 	YearandQuarter=Year+QuarterNo;
+	   		 	System.out.println(YearandQuarter);
+	   		 	break;
+		   	case"April, May, June (Q2)":
+		   		QuarterNo = "2";
+		   		YearandQuarter=Year+QuarterNo;
+		   		break;
+		   	case"July, August, September (Q3)":
+		   		QuarterNo = "3";
+		   		YearandQuarter=Year+QuarterNo;
+		   		break;
+		   	case"October, November, December (Q4)":
+		   		QuarterNo = "4";
+		   		YearandQuarter=Year+QuarterNo;
+		   		break;
+			
+		}
+		
+		switch(FileType){
+		case"CSV":
+			FileExtension=".csv";
+   		 	break;
+	   	case"TXT":
+	   		FileExtension=".txt";
+	   		break;
+	   	case"XML":
+	   		FileExtension=".xml";
+	   		break;
+	   	case"EFW2":
+	   		FileExtension=".txt";
+	   		break;
+	   	case"ICESA":
+	   		FileExtension=".txt";
+	   		break;
+		
+	}
+		
+		if(FileName.equals("CSVTXT")) {
+			FileExtension=".txt";
+		}
+		
+		Map<String,String> variableMap = fillMap();
+		Path path = Paths.get("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\"+FileName+""+FileExtension+"");
+		Path path2 = Paths.get("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\"+FileName+""+"_Updated"+""+FileExtension+"");
+		Stream<String> lines;
+		//try {
+			lines = Files.lines(path,Charset.forName("UTF-8"));
+			List<String> replacedLines = lines.map(line -> replaceTag(line,variableMap))
+	                .collect(Collectors.toList());
+			Files.write(path2, replacedLines, Charset.forName("UTF-8"));
+			lines.close();
+			System.out.println("Find and replace done");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+	
+}
+	
+	
 	public static void findandreplace() {
 		
 		try {
@@ -708,28 +800,17 @@ public static void SelectElementbyValue(String locator,String Value) {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
-//	Map<String,String> variableMap = fillMap();
-//	Path path = Paths.get("C:\\Users\\apgandhi\\Desktop\\BDDFramework\\BDDFreamework\\UploadDocuments\\CSV_DATA.csv");
-//	Stream<String> lines;
-//	try {
-//		lines = Files.lines(path,Charset.forName("UTF-8"));
-//		List<String> replacedLines = lines.map(line -> replaceTag(line,variableMap))
-//                .collect(Collectors.toList());
-//		Files.write(path
-//				, replacedLines, Charset.forName("UTF-8"));
-//		lines.close();
-//		System.out.println("Find and replace done");
-//	} catch (IOException e) {
-//		e.printStackTrace();
-//	}
 
-}
+	}
+	
 
 
 public static Map<String,String> fillMap() {
 	Map<String,String> map = new HashMap<String,String>();
-	map.put("xxxxxxxx", EAN);
+	map.put("zzzzzzzz", EAN);
+	map.put("yyyyy", YearandQuarter);
+	map.put("qqqq", YEAR);
+	map.put("w", QuarterNo);
 	return map;
 }
 private static String replaceTag(String str, Map<String,String> map) {

@@ -489,22 +489,20 @@ public class Stepdefinition extends Mainclass{
     
     }
     
-    @Then("^I replace the data for File Type as (.+)$")
-    public void i_replace_the_data_for_file_type_as(String filetype) throws Throwable { 
-    	findandreplace();
-    	
-    }
-    
-    	
     		
-    
-
-    @Then("^I Upload the file (.+)$")
-    public void i_upload_the_file(String fileName) throws Throwable {
-    	Fileupload(fileName);
-    	clickelement("id","Common.btn_next");
-    	
+    @Then("^I replace the data for File Type as (.+) File Name (.+) for Year (.+) and Quarter (.+)$")
+    public void i_replace_the_data_for_file_type_as_file_name_for_year_and_quarter(String filetype, String filename, String year, String quarter) throws Throwable {
+    	findandreplacedatainfile(filetype,filename,year,quarter);
     }
+
+ 
+    
+    @Then("^I Upload the file (.+) and (.+)$")
+    public void i_upload_the_file_and(String filename, String filetype) throws Throwable {
+    	Fileupload(filename,filetype);
+    	clickelement("id","Common.btn_next");
+    }
+
     
     @And("^I selct Overwrite or merge option (.+) if it gets displayed$")
     public void i_selct_overwrite_or_merge_option_if_it_gets_displayed(String option) throws Throwable {
@@ -535,7 +533,12 @@ public class Stepdefinition extends Mainclass{
     
     @And("^I Select ignore errors and proceed to next screen$")
     public void i_select_ignore_errors_and_proceed_to_next_screen() throws Throwable {
-    	Selectradiobuttonbyindex("id", "WageSubmission.radio_selectaction", "1");
+    	try {
+    		Selectradiobuttonbyindex("id", "WageSubmission.radio_selectaction", "1");
+    }
+    	catch(Exception e) {
+    		e.printStackTrace();	
+    	}
     	clickelement("id","Common.btn_next");
        
     }
@@ -556,7 +559,6 @@ public class Stepdefinition extends Mainclass{
     	
     	}
     }
-
 
     
     @Then("^I calculate the Interest for Month (.+) and Quarter (.+)$")
