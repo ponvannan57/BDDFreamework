@@ -45,6 +45,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.yaml.snakeyaml.Yaml;
 
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
 import jxl.Cell;
 import jxl.Range;
 import jxl.Sheet;
@@ -113,6 +115,7 @@ public class Mainclass {
 		Takescreenshot(nameofCurrClass);
 		
 	}
+	
 
 	public static void initializeObjectProperty(String Filename)
 	 {

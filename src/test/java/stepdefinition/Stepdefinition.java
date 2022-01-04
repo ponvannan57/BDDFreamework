@@ -5,28 +5,36 @@ import static org.testng.Assert.assertEquals;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.*;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 
 import com.aspose.cells.ReplaceOptions;
 import com.aspose.cells.Workbook;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
 import io.cucumber.java.PendingException;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import main.Mainclass;
 
@@ -34,6 +42,31 @@ public class Stepdefinition extends Mainclass{
 	public static int Taxrate;
 	public static String ActualUiroundOff;
 	public static String ActualInterestRate;
+	
+	@Before
+	public static void beforemethod() {
+  		initializeObjectProperty("Wage.yml");
+  	}
+	
+	@AfterStep
+	public void addScreenshot(Scenario scenario) throws IOException {
+		
+		  File screenshot = ((TakesScreenshot) d).getScreenshotAs(OutputType.FILE);
+		  byte[] fileContent = FileUtils.readFileToByteArray(screenshot);
+		  scenario.attach(fileContent, "image/png", "screenshot");
+		
+	}
+	
+//	@AfterStep
+//	public void addScreenshot(Scenario scenario){
+//
+//		//validate if scenario has failed
+//		if(scenario.isFailed()) {
+//			final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//			scenario.attach(screenshot, "image/png", "image"); 
+//		}
+//		
+//	}
 	
 	@Given("^I Configure the Browser as \"([^\"]*)\" with URL \"([^\"]*)\"$")
     public void i_configure_the_browser_as_something_with_url_something(String Browser, String URL) throws Throwable {
@@ -247,7 +280,6 @@ public class Stepdefinition extends Mainclass{
 	     String EMPEmail = EmpData.get(0).get("EMPEmail");
 	     String EMPPhone = EmpData.get(0).get("EMPPhone");
 	     String Yearwages = EmpData.get(0).get("Yearwages");
-	     
 	     Wait(10);
 	     clickelement("xpath","HomePage.Employer");
 	     clickelement("xpath","HomePage.EmployerRegistration");
@@ -543,8 +575,8 @@ public class Stepdefinition extends Mainclass{
        
     }
     
-    @When("^I click on button (.+) and proceed to next screen$")
-    public void i_click_on_button_and_proceed_to_next_screen(String button) throws Throwable {
+    @When("^I click on button (.+) and proceed$")
+    public void i_click_on_button_and_proceed(String button) throws Throwable {
     	switch(button){
     	
     	case"Next":
@@ -559,6 +591,7 @@ public class Stepdefinition extends Mainclass{
     	
     	}
     }
+    
 
     
     @Then("^I calculate the Interest for Month (.+) and Quarter (.+)$")
@@ -616,6 +649,13 @@ public class Stepdefinition extends Mainclass{
 		assertEquals(ActualInterestRate, Interest);	
 		System.out.println("The Actual interest --> "+ActualInterestRate+" is same as interest -->"+Interest);
     }
+    
+    
+    @After
+	public static void terminatebrowser() {
+		terminate();
+		
+	}
     
     }
 

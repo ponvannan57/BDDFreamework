@@ -26,32 +26,15 @@ Feature: Wage Submission
     Then I Upload the file <FileName> and <FileType>
     And I selct Overwrite or merge option <Option> if it gets displayed
     And I Select ignore errors and proceed to next screen
-    When I click on button <button> and proceed
+    When I click on button <button> and proceed to next screen
     Then I calculate the Interest for Month <Year> and Quarter <Quarter>
 
     Examples: 
       | Year | Quarter                          | Method | FileType | FileName   | button | option |
       | 2018 | January, February, March (Q1)    | File   | CSV      | CSV_DATA   | Next   | Merge  |
-      #| 2018 | April, May, June (Q2)            | File   | CSV      | CSVTXT     | Next   | Merge  |
-      #| 2018 | October, November, December (Q4) | File   | XML      | XML_Sample | Next   | Merge  |
-      #| 2018 | July, August, September (Q3)     | File   | EFW2     | EFW2       | Next   | Merge  |
-      #| 2018 | January, February, March (Q1)    | File   | ICESA    | ICESA      | Next   | Merge  |
-      
-      
-  
+      | 2018 | April, May, June (Q2)            | File   | CSV      | CSVTXT     | Next   | Merge  |
+      | 2018 | October, November, December (Q4) | File   | XML      | XML_Sample | Next   | Merge  |
+      | 2018 | July, August, September (Q3)     | File   | EFW2     | EFW2       | Next   | Merge  |
+      | 2018 | January, February, March (Q1)    | File   | ICESA    | ICESA      | Next   | Merge  |
 
-  #@WageSubmission
-  #Scenario Outline: Employer Wage Submission
-    #Then Login with the username <Username>
-    #And I navigate to Wage Submission
-    #When I select year <Year> and quarter <Quarter> for wage submission
-    #Then I select wage submission method as <Method>
-    #And I select the File type as <FileType>
-    #And I selct Overwrite or merge option <Option> if it gets displayed
-    #And I Select ignore errors and proceed to next screen
-    #When I click on button <button> and proceed to next screen
-    #Then I calculate the Interest for Month <Year> and Quarter <Quarter>
-#
-    #Examples: 
-      #| Username | Year | Quarter                      | Method | FileType | FileName           | button | Option |
-      #| mali54   | 2019 | July, August, September (Q3) | File   | CSV      | CSVSAMPLE_DATA.csv | Next   | Merge  |
+  
