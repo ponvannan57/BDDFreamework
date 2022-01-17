@@ -121,11 +121,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-core</artifactId>
-            <version>2.6.0</version>
-        </dependency>
+	
         
 		
 		<!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit -->
@@ -205,19 +201,27 @@
 			<version>5.0.4</version>
 		</dependency>
 
+<!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
+<dependency>
+    <groupId>net.serenity-bdd</groupId>
+    <artifactId>serenity-core</artifactId>
+    <version>3.1.15</version>
+</dependency>
 
-<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
-<!--<dependency>
-    <groupId>com.relevantcodes</groupId>
-    <artifactId>extentreports</artifactId>
-    <version>2.40.2</version>
-</dependency> -->
+<!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit -->
+<dependency>
+    <groupId>net.serenity-bdd</groupId>
+    <artifactId>serenity-junit</artifactId>
+    <version>3.1.15</version>
+</dependency>
+
 <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-ensure -->
 <dependency>
     <groupId>net.serenity-bdd</groupId>
     <artifactId>serenity-ensure</artifactId>
-    <version>2.6.0</version>
+    <version>3.1.15</version>
 </dependency>
+
 
 <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 <dependency>

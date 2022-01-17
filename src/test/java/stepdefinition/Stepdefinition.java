@@ -2,6 +2,7 @@ package stepdefinition;
 
 import static org.testng.Assert.assertEquals;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,6 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import javax.imageio.ImageIO;
+
 import java.util.*;
 
 import org.apache.commons.io.FileUtils;
@@ -37,6 +41,9 @@ import io.cucumber.java.PendingException;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import main.Mainclass;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class Stepdefinition extends Mainclass{
 	public static int Taxrate;
@@ -108,12 +115,13 @@ public class Stepdefinition extends Mainclass{
 		     clickelement("id","Common.btn_next");
 		     
 		     while(d.getPageSource().contains("Enter this employer's Federal Employer Identification Number (FEIN) is not a valid federal ein")||
-		    		 d.getPageSource().contains("Enter this employer's Federal Employer Identification Number (FEIN) is not a valid #")) {
+		    		 d.getPageSource().contains("Enter this employer's Federal Employer Identification Number (FEIN) is not a valid #")){
 		    	 System.out.println("Inside Incorrect FEIN");
 		    	 cleartext("id","EMPRegNotificationScreen.txt_FEIN");
 		    	 SendText("id","EMPRegNotificationScreen.txt_FEIN",GenerateFEIN());
 		    	 Wait(5);
 		    	 clickelement("id","Common.btn_next");
+		    	 
 		    	 
 		     }
 		     while(d.getPageSource().contains("The FEIN entered already exists in the system for another employer account")) {
@@ -263,7 +271,6 @@ public class Stepdefinition extends Mainclass{
 		     String Username = StoredSring;
 		     System.out.println("***** The Username is --> "+Username+" *****");
 //		     clickelement("id","Common.btn_Home");  
-		     terminate();
 		
     }
 	
@@ -651,11 +658,11 @@ public class Stepdefinition extends Mainclass{
     }
     
     
-    @After
-	public static void terminatebrowser() {
-		terminate();
-		
-	}
+//    @After
+//	public static void terminatebrowser() {
+//		terminate();
+//		
+//	}
     
     }
 

@@ -1,9 +1,10 @@
+
 Feature: Wage Submission
 
   Background: 
     Given I Configure the Browser as "Chrome" with URL "New"
 
-  @EmpRegistration
+  @T1
   Scenario Outline: Employer Registration
     Then I Register an Employer As per Deatils from Below DataTable for Iteration <Iteration>
       | ServiceBeginDate | Yearwages | ServiceEndDate | EMPAddress        | EMPCity  | EMPState   | EMPZipCode | EMPEmail           | EMPPhone   |
@@ -12,8 +13,9 @@ Feature: Wage Submission
     Examples: 
       | Iteration |
       |         1 |
+      
 
-  @EmpCreationandWageSubmission
+  @T2
   Scenario Outline: Employer Wage Submission For FileType <FileType>
     Then I Register an Employer As per Deatils from Below DataTable
       | ServiceBeginDate | Yearwages | ServiceEndDate | EMPAddress        | EMPCity  | EMPState   | EMPZipCode | EMPEmail           | EMPPhone   |
@@ -32,26 +34,26 @@ Feature: Wage Submission
     Examples: 
       | Year | Quarter                          | Method | FileType | FileName   | button | option |
       | 2018 | January, February, March (Q1)    | File   | CSV      | CSV_DATA   | Next   | Merge  |
-      #| 2018 | April, May, June (Q2)            | File   | CSV      | CSVTXT     | Next   | Merge  |
-      #| 2018 | October, November, December (Q4) | File   | XML      | XML_Sample | Next   | Merge  |
-      #| 2018 | July, August, September (Q3)     | File   | EFW2     | EFW2       | Next   | Merge  |
-      #| 2018 | January, February, March (Q1)    | File   | ICESA    | ICESA      | Next   | Merge  |
+      | 2018 | April, May, June (Q2)            | File   | CSV      | CSVTXT     | Next   | Merge  |
+      | 2018 | October, November, December (Q4) | File   | XML      | XML_Sample | Next   | Merge  |
+      | 2018 | July, August, September (Q3)     | File   | EFW2     | EFW2       | Next   | Merge  |
+      | 2018 | January, February, March (Q1)    | File   | ICESA    | ICESA      | Next   | Merge  |
       
       
   
 
-  #@WageSubmission
-  #Scenario Outline: Employer Wage Submission
-    #Then Login with the username <Username>
-    #And I navigate to Wage Submission
-    #When I select year <Year> and quarter <Quarter> for wage submission
-    #Then I select wage submission method as <Method>
-    #And I select the File type as <FileType>
+  @T3
+  Scenario Outline: Employer Wage Submission
+    Then Login with the username <Username>
+    And I navigate to Wage Submission
+    When I select year <Year> and quarter <Quarter> for wage submission
+    Then I select wage submission method as <Method>
+    And I select the File type as <FileType>
     #And I selct Overwrite or merge option <Option> if it gets displayed
     #And I Select ignore errors and proceed to next screen
     #When I click on button <button> and proceed to next screen
     #Then I calculate the Interest for Month <Year> and Quarter <Quarter>
-#
-    #Examples: 
-      #| Username | Year | Quarter                      | Method | FileType | FileName           | button | Option |
-      #| mali54   | 2019 | July, August, September (Q3) | File   | CSV      | CSVSAMPLE_DATA.csv | Next   | Merge  |
+
+    Examples: 
+      | Username | Year | Quarter                      | Method | FileType | FileName           | button | Option |
+      | mali54   | 2019 | July, August, September (Q3) | File   | CSV      | CSVSAMPLE_DATA.csv | Next   | Merge  |

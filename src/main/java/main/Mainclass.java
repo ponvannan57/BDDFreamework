@@ -79,6 +79,7 @@ public class Mainclass {
 	public static String FilePath;
 	public static String FileExtension;
 	public static String YEAR;
+	public static String Elementpath;
 
 	
     
@@ -210,6 +211,7 @@ public class Mainclass {
 		
 	}
 
+
 	public static void Selectradiobuttonbyname(String locator,String Elementpath,String Name) {
 		
 		
@@ -223,7 +225,7 @@ public class Mainclass {
 			break;
 		
 		}
-		
+
 	}
 	
 public static void SelectElementbyValue(String locator,String Value) {
@@ -493,7 +495,9 @@ public static void SelectElementbyValue(String locator,String Value) {
 		
 	}
 
-	public static void selectdropdownbytext(String locator, String Elementpath, String Text) {
+	public static void selectdropdownbytext(String locator, String Elementpath,String Text) {
+		
+		//Elementpath =PageName+"."+ElementName ;
 		
 		WaitForElement(10,locator,Elementpath);
 		

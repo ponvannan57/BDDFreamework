@@ -13,7 +13,7 @@ import main.*;
 		features = "src/test/java/features",
 		glue = "stepdefinition", 
 		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-		tags = "@EmpCreationandWageSubmission",
+		tags = "@T1",
 		monochrome = true,
 		publish = true
 	

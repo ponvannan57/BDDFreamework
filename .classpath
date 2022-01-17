@@ -39,5 +39,6 @@
 	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/JDK 1.6/lib/aspose-cells-21.12.jar"/>
 	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/JDK 1.6/lib/bcpkix-jdk15on-1.60.jar"/>
 	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/JDK 1.6/lib/bcprov-jdk15on-1.60.jar"/>
+	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/ashot-1.5.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
