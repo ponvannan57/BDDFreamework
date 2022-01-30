@@ -15,7 +15,7 @@ import main.*;
 		plugin = {
 				"pretty", "html:target/cucumber", "json:target/Cucumber.json",
 				"junit:target/Cucumber.xml" }, 
-		tags = "@EmpCreationandWageSubmission"
+		tags = "@T3"
 	
     )
 

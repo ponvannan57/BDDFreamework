@@ -86,7 +86,6 @@ public class Mainclass {
 	@SuppressWarnings("deprecation")
 
 	public  void Browserselection (String Browser, String URL) {
-
 		
 		switch(Browser) {
 		

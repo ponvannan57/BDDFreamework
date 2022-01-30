@@ -18,6 +18,7 @@ Common:
    
 HomePage:
    Username: "//input[@type='text']"
+   Password: "//input[@type='password']"
    Loginbutton: "//button[@value='Login']"
    Employer: "//li[@title='Employer']"
    EmployerRegistration: "(//li[@title='Employer Registration'])[1]"

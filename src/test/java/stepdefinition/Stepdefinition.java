@@ -111,6 +111,7 @@ public class Stepdefinition extends Mainclass{
 //			    Point Diemension = FEIN.getLocation();
 //			    System.out.println(Size);
 //			    System.out.println(Diemension);
+		   
 		     
 		     clickelement("id","Common.btn_next");
 		     
@@ -471,6 +472,7 @@ public class Stepdefinition extends Mainclass{
     @Then("^Login with the username (.+)$")
     public void login_with_the_username(String username) throws Throwable {
     	SendText("xpath","HomePage.Username",username);
+    	SendText("xpath","HomePage.Password",username);
     	clickelement("xpath","HomePage.Loginbutton"); 
         
     }
