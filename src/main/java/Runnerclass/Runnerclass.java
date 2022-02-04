@@ -13,7 +13,8 @@ import main.*;
 		glue = "stepdefinition", 
 		monochrome = true, 
 		plugin = {
-				"pretty", "html:target/cucumber", "json:target/Cucumber.json",
+				"pretty", "html:target/cucumber",
+				"json:target/Cucumber.json",
 				"junit:target/Cucumber.xml" }, 
 		tags = "@T3"
 	
