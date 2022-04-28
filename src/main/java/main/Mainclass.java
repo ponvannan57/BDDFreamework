@@ -40,10 +40,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.yaml.snakeyaml.Yaml;
+
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
+import com.google.protobuf.ByteString.Output;
 
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
@@ -833,6 +837,34 @@ private static String replaceTag(String str, Map<String,String> map) {
 		d.quit();
 		
 	}
+	
+	public static void open() throws IOException {
+		
+		Actions a = new Actions(d);
+		
+		a.moveToElement(WE).perform();
+		
+		Select s = new Select(WE);
+		s.selectByValue(EAN);
+		
+		
+		List <WebElement> L = d.findElements(By.xpath(EAN));
+		 
+		L.get(1).click();
+		
+		
+	d.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+	
+	WebDriverWait Wait = new WebDriverWait(d, 10);
+	Wait.until(ExpectedConditions.visibilityOfElementLocated((By) WE));
+		
+		File Src = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(Src, new File("jhg"));
+		
+		JavaScriptExecutor Ex = (JavaScriptExecutor)d;
+	}
+
+
 
 }
 

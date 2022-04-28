@@ -24,21 +24,21 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/JDK 1.6/lib/aspose-cells-21.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/JDK 1.6/lib/bcpkix-jdk15on-1.60.jar"/>
-	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/JDK 1.6/lib/bcprov-jdk15on-1.60.jar"/>
-	<classpathentry kind="lib" path="C:/Users/apgandhi/Downloads/ashot-1.5.4.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/91950/OneDrive/Desktop/Synechron/lib/aspose-gridweb-22.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/91950/OneDrive/Desktop/Synechron/JDK 1.6/lib/aspose-cells-22.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/91950/Downloads/ashot-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/91950/OneDrive/Desktop/Synechron/ashot-1.5.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
