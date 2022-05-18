@@ -159,7 +159,7 @@ public class Mainclass {
 		
 		try {
 		
-		File Src = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
+File Src = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(Src, new File(Filename));
 		}
 		catch(IOException e) {
